@@ -1,0 +1,11 @@
+# Astro genera esta carpeta durante la compilación.
+dist/
+
+# npm instala aquí las dependencias locales.
+node_modules/
+
+# Astro guarda aquí información temporal.
+.astro/
+
+# macOS puede crear este archivo al abrir carpetas.
+.DS_Store

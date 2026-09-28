@@ -19,17 +19,28 @@ Cómo comprobarlo:
 
 ## Ejecución local
 
-No requiere instalación. Abra `dist/index.html` en un navegador moderno.
-
-También puede servirla localmente desde esta carpeta:
+Instale las dependencias:
 
 ```bash
-python3 -m http.server 8000 --directory dist
+npm install
 ```
 
-Luego visite `http://localhost:8000`.
+Inicie el servidor de desarrollo:
+
+```bash
+npm run dev
+```
+
+Abra la dirección que Astro muestra en la terminal. Para crear la versión final use `npm run build`.
 
 ## Archivos
 
-- `dist/index.html`: aplicación completa (HTML, CSS y JavaScript).
-- `configuracion/hosting.json`: copia de la configuración utilizada para la publicación estática inicial.
+- `src/pages/index.astro`: estructura, contenido y comportamiento de la aplicación.
+- `src/layouts/BaseLayout.astro`: plantilla HTML y metadatos comunes.
+- `src/styles/global.css`: sistema visual y adaptación a pantallas pequeñas.
+- `public/favicon.svg`: icono de la pestaña.
+- `astro.config.mjs`: configuración de Astro para GitHub Pages.
+- `.github/workflows/pages.yml`: publicación automática desde la rama `main`.
+- `configuracion/hosting.json`: copia de la configuración utilizada para la publicación inicial.
+
+El código incluye comentarios en español que explican cada bloque y cada paso de la validación.

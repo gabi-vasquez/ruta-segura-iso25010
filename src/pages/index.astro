@@ -1,0 +1,308 @@
+---
+// Carga la plantilla que contiene las etiquetas comunes del documento.
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Carga los estilos de esta aplicación en la compilación de Astro.
+import "../styles/global.css";
+
+// Define el texto de la pestaña y de los resultados de búsqueda.
+const title = "Ruta Segura | Demostración ISO/IEC 25010";
+
+// Resume la función concreta de la aplicación.
+const description = "Simulador que previene errores al configurar una entrega con dron.";
+---
+
+<!-- Aplica la estructura común y envía sus metadatos. -->
+<BaseLayout {title} {description}>
+  <!-- Limita el ancho de todo el contenido principal. -->
+  <main class="page">
+    <!-- Identifica el proyecto y la norma sin ocupar el área de trabajo. -->
+    <header class="masthead">
+      <!-- Agrupa el símbolo y el nombre del proyecto. -->
+      <div class="brand">
+        <!-- Oculta el símbolo a lectores de pantalla porque el texto ya lo explica. -->
+        <span class="brand-mark" aria-hidden="true">✓</span>
+        <!-- Nombra la aplicación. -->
+        <span>Ruta Segura</span>
+      </div>
+      <!-- Sitúa el ejercicio dentro de la familia SQuaRE. -->
+      <p class="standard">ISO/IEC 25010 · Protección contra errores del usuario</p>
+    </header>
+
+    <!-- Presenta el objetivo y el criterio que puede comprobarse. -->
+    <section class="brief" aria-labelledby="page-title">
+      <!-- Mantiene el texto principal en una columna legible. -->
+      <div>
+        <!-- Formula la tarea desde el punto de vista de quien usa la aplicación. -->
+        <h1 id="page-title">Prepara una entrega que pueda despegar.</h1>
+        <!-- Explica la interacción sin lenguaje promocional. -->
+        <p class="brief-copy">Configura el peso, la batería y la zona de vuelo. El sistema bloquea cualquier combinación peligrosa y explica qué debes corregir.</p>
+      </div>
+
+      <!-- Muestra el requisito medible junto al contador en tiempo real. -->
+      <aside class="requirement" aria-label="Requisito comprobable">
+        <!-- Nombra el bloque por su función. -->
+        <h2>Condición de aceptación</h2>
+        <!-- Describe un resultado observable y repetible. -->
+        <p>El despegue solo se activa cuando los tres controles cumplen sus límites.</p>
+        <!-- Alinea el contador con una descripción comprensible. -->
+        <div class="score-row">
+          <!-- Informa los cambios del contador a tecnologías de asistencia. -->
+          <strong id="score" class="score" aria-live="polite">0/3</strong>
+          <!-- Aclara qué representa el número. -->
+          <span>controles válidos</span>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Une el formulario y la ruta de validación en una sola consola. -->
+    <section class="console" aria-label="Consola de autorización de vuelo">
+      <!-- Contiene los datos que la persona puede modificar. -->
+      <div class="controls">
+        <!-- Resume la misión y su estado actual. -->
+        <div class="console-head">
+          <!-- Agrupa el identificador y el destino. -->
+          <div>
+            <!-- Identifica una misión concreta para dar contexto al ejercicio. -->
+            <h2>Misión DR-042</h2>
+            <!-- Indica qué se entrega y a dónde. -->
+            <p class="mission-detail">Medicamentos para el centro de salud Norte</p>
+          </div>
+          <!-- Cambia cuando la configuración ya es segura. -->
+          <span id="missionStatus" class="status">Revisión pendiente</span>
+        </div>
+
+        <!-- Desactiva la validación nativa para mostrar mensajes propios y específicos. -->
+        <form id="missionForm" novalidate>
+          <!-- Organiza los tres datos de la misión. -->
+          <div class="fields">
+            <!-- Agrupa etiqueta, control, ayuda y error del peso. -->
+            <div class="field">
+              <!-- Vincula el nombre visible con el campo. -->
+              <label for="weight">Peso del paquete</label>
+              <!-- Empieza con un valor inválido para demostrar la prevención. -->
+              <input id="weight" name="weight" type="number" min="0.1" max="5" step="0.1" value="7" aria-describedby="weightHelp weightError" aria-invalid="true" />
+              <!-- Muestra la regla antes de que ocurra el error. -->
+              <span id="weightHelp" class="help">Usa un valor entre 0,1 y 5 kg.</span>
+              <!-- Explica cómo corregir el valor inicial. -->
+              <span id="weightError" class="error" aria-live="polite">Reduce el peso a 5 kg o menos.</span>
+            </div>
+
+            <!-- Agrupa etiqueta, control, ayuda y error de la batería. -->
+            <div class="field">
+              <!-- Vincula el nombre visible con el campo. -->
+              <label for="battery">Batería disponible</label>
+              <!-- Empieza por debajo del mínimo seguro para mostrar el bloqueo. -->
+              <input id="battery" name="battery" type="number" min="40" max="100" step="1" value="25" aria-describedby="batteryHelp batteryError" aria-invalid="true" />
+              <!-- Informa el límite antes de enviar el formulario. -->
+              <span id="batteryHelp" class="help">Necesitas entre 40 % y 100 %.</span>
+              <!-- Nombra la acción que resuelve el problema. -->
+              <span id="batteryError" class="error" aria-live="polite">Carga la batería al menos hasta 40 %.</span>
+            </div>
+
+            <!-- Hace que la zona ocupe el ancho completo del formulario. -->
+            <div class="field field-wide">
+              <!-- Vincula el nombre visible con la lista. -->
+              <label for="zone">Zona de entrega</label>
+              <!-- Ofrece una opción restringida y dos zonas autorizadas. -->
+              <select id="zone" name="zone" aria-describedby="zoneHelp zoneError" aria-invalid="true">
+                <!-- Selecciona el caso de error al abrir la aplicación. -->
+                <option value="restricted" selected>R-12 · Zona restringida</option>
+                <!-- Permite elegir el destino de esta misión. -->
+                <option value="north">N-04 · Centro Norte</option>
+                <!-- Incluye una segunda alternativa válida. -->
+                <option value="east">E-08 · Corredor Este</option>
+              </select>
+              <!-- Explica por qué algunas opciones se rechazan. -->
+              <span id="zoneHelp" class="help">Las zonas restringidas no admiten vuelos.</span>
+              <!-- Pide una corrección concreta. -->
+              <span id="zoneError" class="error" aria-live="polite">Selecciona una zona autorizada.</span>
+            </div>
+          </div>
+
+          <!-- Coloca la acción final junto a un atajo para la demostración. -->
+          <div class="actions">
+            <!-- Permanece desactivado mientras exista un error. -->
+            <button id="submitButton" class="button button-primary" type="submit" disabled>Autorizar despegue</button>
+            <!-- Introduce valores válidos para repetir la comprobación con rapidez. -->
+            <button id="fixButton" class="button button-secondary" type="button">Aplicar valores seguros</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Representa los controles como paradas de una ruta de vuelo. -->
+      <aside class="route" aria-labelledby="route-title">
+        <!-- Nombra el resultado que se actualiza en tiempo real. -->
+        <h2 id="route-title">Ruta de validación</h2>
+        <!-- Agrupa las tres condiciones del requisito. -->
+        <div class="checklist" aria-live="polite">
+          <!-- Muestra el resultado de la carga. -->
+          <div id="weightCheck" class="check">
+            <!-- Contiene la señal visual que cambia de cruz a verificación. -->
+            <span class="check-icon" aria-hidden="true">×</span>
+            <!-- Explica la primera regla. -->
+            <div><strong>Carga admitida</strong><span>Máximo 5 kg</span></div>
+          </div>
+          <!-- Muestra el resultado de la autonomía. -->
+          <div id="batteryCheck" class="check">
+            <!-- Contiene la señal visual que cambia de cruz a verificación. -->
+            <span class="check-icon" aria-hidden="true">×</span>
+            <!-- Explica la segunda regla. -->
+            <div><strong>Autonomía suficiente</strong><span>Mínimo 40 %</span></div>
+          </div>
+          <!-- Muestra el resultado de la zona. -->
+          <div id="zoneCheck" class="check">
+            <!-- Contiene la señal visual que cambia de cruz a verificación. -->
+            <span class="check-icon" aria-hidden="true">×</span>
+            <!-- Explica la tercera regla. -->
+            <div><strong>Zona autorizada</strong><span>Sin restricción de vuelo</span></div>
+          </div>
+        </div>
+        <!-- Resume por qué el botón está bloqueado o habilitado. -->
+        <div id="result" class="result"><strong>Acción bloqueada.</strong><br />Corrige los campos señalados.</div>
+      </aside>
+    </section>
+
+    <!-- Documenta la relación entre el ejercicio y la norma. -->
+    <section class="explanation" aria-labelledby="explanation-title">
+      <!-- Introduce la explicación que puede usarse al presentar el proyecto. -->
+      <h2 id="explanation-title">Qué demuestra</h2>
+      <!-- Divide la explicación según las preguntas de la entrega. -->
+      <div class="notes">
+        <!-- Resume la idea. -->
+        <article class="note"><h3>La idea</h3><p>Una persona configura una entrega con dron y recibe ayuda antes de autorizarla.</p></article>
+        <!-- Nombra la característica seleccionada. -->
+        <article class="note"><h3>La característica</h3><p>Protección contra errores del usuario, dentro de la capacidad de interacción de ISO/IEC 25010.</p></article>
+        <!-- Explica la evidencia visible. -->
+        <article class="note"><h3>La prueba</h3><p>El botón permanece bloqueado hasta que peso, batería y zona cumplen sus límites.</p></article>
+      </div>
+    </section>
+
+    <!-- Aclara el alcance académico del ejercicio. -->
+    <p class="footer">Demostración educativa. El proyecto no constituye una certificación formal.</p>
+  </main>
+
+  <!-- Confirma la acción sin cambiar de página. -->
+  <div id="toast" class="toast" role="status" aria-live="polite">Misión autorizada. Los tres controles son válidos.</div>
+
+  <script>
+    // Busca los tres campos que participan en la validación.
+    const weight = document.querySelector<HTMLInputElement>("#weight");
+    const battery = document.querySelector<HTMLInputElement>("#battery");
+    const zone = document.querySelector<HTMLSelectElement>("#zone");
+
+    // Busca los elementos cuyo estado visual debe cambiar.
+    const score = document.querySelector<HTMLElement>("#score");
+    const submitButton = document.querySelector<HTMLButtonElement>("#submitButton");
+    const missionStatus = document.querySelector<HTMLElement>("#missionStatus");
+    const result = document.querySelector<HTMLElement>("#result");
+
+    // Agrupa los controles para recorrerlos sin repetir lógica.
+    const fields = { weight, battery, zone };
+
+    // Relaciona cada dato con su indicador de la ruta.
+    const checks = {
+      weight: document.querySelector<HTMLElement>("#weightCheck"),
+      battery: document.querySelector<HTMLElement>("#batteryCheck"),
+      zone: document.querySelector<HTMLElement>("#zoneCheck"),
+    };
+
+    // Relaciona cada dato con el mensaje que explica su error.
+    const errors = {
+      weight: document.querySelector<HTMLElement>("#weightError"),
+      battery: document.querySelector<HTMLElement>("#batteryError"),
+      zone: document.querySelector<HTMLElement>("#zoneError"),
+    };
+
+    // Comprueba que Astro haya renderizado todos los elementos necesarios.
+    const ready = weight && battery && zone && score && submitButton && missionStatus && result && Object.values(checks).every(Boolean) && Object.values(errors).every(Boolean);
+
+    // Ejecuta la lógica solo cuando la interfaz está completa.
+    if (ready) {
+      // Calcula las tres reglas y actualiza toda la respuesta visible.
+      const validate = () => {
+        // Evalúa los valores actuales con los límites del requisito.
+        const valid = {
+          weight: Number(weight.value) >= 0.1 && Number(weight.value) <= 5,
+          battery: Number(battery.value) >= 40 && Number(battery.value) <= 100,
+          zone: zone.value !== "restricted",
+        };
+
+        // Actualiza cada campo, mensaje e indicador usando el mismo resultado.
+        Object.entries(valid).forEach(([key, isValid]) => {
+          // Convierte la clave en un tipo válido para acceder a los grupos.
+          const fieldKey = key as keyof typeof fields;
+          // Recupera el campo relacionado con la regla.
+          const field = fields[fieldKey]!;
+          // Recupera la parada correspondiente de la ruta.
+          const check = checks[fieldKey]!;
+          // Recupera el texto de error correspondiente.
+          const error = errors[fieldKey]!;
+          // Marca visualmente el control superado.
+          check.classList.toggle("pass", isValid);
+          // Cambia la cruz por una verificación cuando la regla se cumple.
+          check.querySelector<HTMLElement>(".check-icon")!.textContent = isValid ? "✓" : "×";
+          // Comunica el estado del campo a lectores de pantalla.
+          field.setAttribute("aria-invalid", String(!isValid));
+          // Oculta el error resuelto o muestra una instrucción específica.
+          error.textContent = isValid ? "" : fieldKey === "weight" ? "Usa un valor entre 0,1 y 5 kg." : fieldKey === "battery" ? "Usa un valor entre 40 % y 100 %." : "Selecciona una zona autorizada.";
+        });
+
+        // Cuenta cuántas reglas se cumplen.
+        const passed = Object.values(valid).filter(Boolean).length;
+        // Define si ya puede autorizarse la misión.
+        const allValid = passed === 3;
+        // Muestra el avance numérico.
+        score.textContent = `${passed}/3`;
+        // Cambia el color del contador al completar la ruta.
+        score.classList.toggle("complete", allValid);
+        // Bloquea o habilita la acción final.
+        submitButton.disabled = !allValid;
+        // Resume el estado junto al nombre de la misión.
+        missionStatus.textContent = allValid ? "Lista para despegar" : "Revisión pendiente";
+        // Aplica el color de éxito cuando corresponde.
+        missionStatus.classList.toggle("ready", allValid);
+        // Cambia el aspecto del resumen final.
+        result.classList.toggle("success", allValid);
+        // Explica la siguiente acción sin usar un mensaje genérico.
+        result.innerHTML = allValid ? "<strong>Configuración segura.</strong><br>Ya puedes autorizar el despegue." : "<strong>Acción bloqueada.</strong><br>Corrige los campos señalados.";
+        // Devuelve el resultado para reutilizarlo al enviar el formulario.
+        return allValid;
+      };
+
+      // Vuelve a comprobar la misión en cada cambio de peso, batería o zona.
+      Object.values(fields).forEach((field) => field!.addEventListener("input", validate));
+
+      // Introduce una configuración válida para facilitar la demostración.
+      document.querySelector<HTMLButtonElement>("#fixButton")!.addEventListener("click", () => {
+        // Asigna un peso aceptado.
+        weight.value = "3.5";
+        // Asigna una batería por encima del mínimo.
+        battery.value = "72";
+        // Selecciona la zona del destino indicado.
+        zone.value = "north";
+        // Refresca la interfaz con los nuevos valores.
+        validate();
+        // Devuelve el foco al primer campo para mantener el control del teclado.
+        weight.focus();
+      });
+
+      // Intercepta el envío para mantener la experiencia en la misma página.
+      document.querySelector<HTMLFormElement>("#missionForm")!.addEventListener("submit", (event) => {
+        // Evita que el navegador recargue la página.
+        event.preventDefault();
+        // Detiene la acción si alguna regla dejó de cumplirse.
+        if (!validate()) return;
+        // Busca la confirmación flotante.
+        const toast = document.querySelector<HTMLElement>("#toast")!;
+        // Muestra la confirmación.
+        toast.classList.add("show");
+        // Oculta la confirmación después de tres segundos y medio.
+        window.setTimeout(() => toast.classList.remove("show"), 3500);
+      });
+
+      // Sincroniza la interfaz con los valores iniciales al cargar la página.
+      validate();
+    }
+  </script>
+</BaseLayout>
