@@ -36,6 +36,7 @@ Abra la dirección que Astro muestra en la terminal. Para crear la versión fina
 ## Archivos
 
 - `src/pages/index.astro`: estructura, contenido y comportamiento de la aplicación.
+- `src/scripts/MissionApplication.ts`: clases orientadas a objetos para reglas, campos, vista y coordinación de la misión.
 - `src/layouts/BaseLayout.astro`: plantilla HTML y metadatos comunes.
 - `src/styles/global.css`: sistema visual y adaptación a pantallas pequeñas.
 - `public/favicon.svg`: icono de la pestaña.
@@ -44,3 +45,13 @@ Abra la dirección que Astro muestra en la terminal. Para crear la versión fina
 - `configuracion/hosting.json`: copia de la configuración utilizada para la publicación inicial.
 
 El código incluye comentarios en español que explican cada bloque y cada paso de la validación.
+
+## Programación orientada a objetos
+
+La lógica usa encapsulación, herencia, polimorfismo y composición:
+
+- `ValidationRule<T>` define el contrato común de las reglas.
+- `RangeRule` y `ExcludedValueRule` heredan ese contrato y lo implementan de manera diferente.
+- `FieldController<T>` encapsula cada campo y su representación visual.
+- `MissionView` controla el estado general que ve la persona.
+- `MissionApplication` crea los objetos, conecta los eventos y coordina la misión.
