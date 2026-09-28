@@ -8,8 +8,8 @@ interface Props {
 // Lee el título y la descripción enviados por la página principal.
 const { title, description } = Astro.props;
 
-// Obtiene la ruta base para que el icono funcione en GitHub Pages.
-const base = import.meta.env.BASE_URL;
+// Guarda la ruta pública del repositorio para localizar el icono en GitHub Pages.
+const base = "/ruta-segura-iso25010/";
 ---
 
 <!doctype html>
