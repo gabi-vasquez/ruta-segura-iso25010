@@ -32,5 +32,4 @@ Luego visite `http://localhost:8000`.
 ## Archivos
 
 - `dist/index.html`: aplicación completa (HTML, CSS y JavaScript).
-- `.openai/hosting.json`: configuración de publicación estática.
-
+- `configuracion/hosting.json`: copia de la configuración utilizada para la publicación estática inicial.
